@@ -8,7 +8,7 @@ CREATE TABLE todo_list
 (id BIGSERIAL PRIMARY KEY,
 item TEXT,
 highlight BOOLEAN,
-COMPLETED BOOLEAN
+completed BOOLEAN
 );
 
 COMMIT;
