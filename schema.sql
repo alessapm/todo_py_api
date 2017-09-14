@@ -7,7 +7,6 @@ DROP TABLE IF EXISTS todo_list;
 CREATE TABLE todo_list
 (id BIGSERIAL PRIMARY KEY,
 item TEXT,
-highlight BOOLEAN,
 completed BOOLEAN
 );
 

@@ -18,7 +18,6 @@ class Todo(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     item = Column(db.String(500))
-    highlight = Column(db.Boolean)
     completed = Column(db.Boolean)
 
 
