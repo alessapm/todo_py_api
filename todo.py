@@ -13,19 +13,20 @@ a GET (for retrieve all)
 a POST (for create new item)
 a PUT (for mark item as complete) """
 @app.route('/', methods=["GET"])
-print "request: " + request
+
 def show_all():
     # will return all items in todo list
-    return 'Hello, World!'
+    return db.execute('SELECT * FROM todo_list')
 
 @app.route('/new', methods=["POST"])
+print "request: " + request
 def add_item():
     # will add new item to db
-    db.execute('INSERT INTO todo_list (title, text) values (?, ?)',
-                 [request.form['title'], request.form['text']])
+    db.execute('INSERT INTO todo_list (item, highlight, completed) values (?, ?)',
+                 [request.form['item'], request.form['highlight'], request.form['completed']])
     db.commit()
-    flash('New entry was successfully posted')
-    return redirect(url_for('show_entries'))
+
+    # return data somehow?
 
 @app.route('/comp/<int:id>', methods=["PUT"])
 def mark_complete():
