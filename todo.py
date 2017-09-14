@@ -13,13 +13,13 @@ app=flask.Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/todo_tictail'
 db = SQLAlchemy(app)
 
-class Todo(Base):
+class Todo(db.Model):
     __tablename__ = 'todo_list'
 
-    id = Column(Integer, primary_key=True)
-    item = Column(String(500))
-    highlight = Column(Boolean)
-    completed = Column(Boolean)
+    id = db.Column(db.Integer, primary_key=True)
+    item = Column(db.String(500))
+    highlight = Column(db.Boolean)
+    completed = Column(db.Boolean)
 
 
 """ I will need three routes,
