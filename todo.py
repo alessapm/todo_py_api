@@ -4,6 +4,8 @@ from flask import request
 from flask.ext.sqlalchemy import SQLAlchemy
 
 app=flask.Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/todo_tictail'
+db = SQLAlchemy(app)
 
 
 """ I will need three routes,
