@@ -6,11 +6,20 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.orm.collections import attribute_mapped_collection
+from sqlalchemy.orm import column_property
 from sqlalchemy.ext.declarative import declarative_base
 
 app=flask.Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/todo_tictail'
 db = SQLAlchemy(app)
+
+class Todo(Base):
+    __tablename__ = 'todo_list'
+
+    id = Column(Integer, primary_key=True)
+    item = Column(String(500))
+    highlight = Column(Boolean)
+    completed = Column(Boolean)
 
 
 """ I will need three routes,
@@ -21,8 +30,9 @@ a PUT (for mark item as complete) """
 
 def show_all():
     # will return all items in todo list
-
-     return db.query('SELECT * FROM todo_list')
+    print "inside show_all"
+    data = db.session.query('todo_list').all()
+    return data
 
 @app.route('/new', methods=["POST"])
 # print "request: " + request
