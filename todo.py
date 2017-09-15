@@ -9,7 +9,7 @@ from sqlalchemy.orm.collections import attribute_mapped_collection
 from sqlalchemy.orm import column_property
 from sqlalchemy.ext.declarative import declarative_base
 
-from flask import jsonify
+# from flask import jsonify
 
 
 app=flask.Flask(__name__)
@@ -34,22 +34,23 @@ def show_all():
     # will return all items in todo list
     print "inside show_all"
     data = db.session.query(Todo).all()
-    return jsonify(data);
+    return data;
 
-# @app.route('/new', methods=["POST"])
-# # print "request: " + request
-# def add_item():
-#     # will add new item to db
-#     db.query('INSERT INTO todo_list (item, highlight, completed) values (?, ?)',
-#                  [request.form['item'], request.form['highlight'], request.form['completed']])
-#     # db.commit()
+@app.route('/new', methods=["POST"])
+# print "request: " + request
+def add_item():
+    # will add new item to db
+    return db.session.query('INSERT INTO todo_list (item, highlight, completed) values (?, ?)',
+                 [request.form['item'], request.form['highlight'], request.form['completed']])
+    # db.commit()
 
-#     # return data somehow?
+    # return data somehow?
 
-# @app.route('/comp/<int:id>', methods=["PUT"])
-# def mark_complete():
-#     #will update an item's complete feild to trueflask
-#     return db.query('SELECT * FROM todo_list')
+@app.route('/comp/<int:id>', methods=["PUT"])
+    # has to pass an id to mark_complete
+def mark_complete(id):
+    #will update an item's complete feild to true
+    return db.session.query('UPDATE complete = true in todo_list where id = ? ', id)
 
 
 # do i need this?
