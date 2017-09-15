@@ -30,8 +30,8 @@ a PUT (for mark item as complete) """
 def show_all():
     # will return all items in todo list
     print "inside show_all"
-    data = db.session.query('todo_list').all()
-    return data
+    data = db.session.query(Todo).all()
+    return data;
 
 @app.route('/new', methods=["POST"])
 # print "request: " + request
@@ -47,3 +47,9 @@ def add_item():
 def mark_complete():
     #will update an item's complete feild to trueflask
     return db.query('SELECT * FROM todo_list')
+
+
+# do i need this?
+if __name__ == '__main__':
+    app.debug = True
+    app.run()
