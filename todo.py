@@ -9,6 +9,9 @@ from sqlalchemy.orm.collections import attribute_mapped_collection
 from sqlalchemy.orm import column_property
 from sqlalchemy.ext.declarative import declarative_base
 
+from flask import jsonify
+
+
 app=flask.Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/todo_tictail'
 db = SQLAlchemy(app)
@@ -31,25 +34,23 @@ def show_all():
     # will return all items in todo list
     print "inside show_all"
     data = db.session.query(Todo).all()
-    return data;
+    return jsonify(data);
 
-@app.route('/new', methods=["POST"])
-# print "request: " + request
-def add_item():
-    # will add new item to db
-    db.query('INSERT INTO todo_list (item, highlight, completed) values (?, ?)',
-                 [request.form['item'], request.form['highlight'], request.form['completed']])
-    # db.commit()
+# @app.route('/new', methods=["POST"])
+# # print "request: " + request
+# def add_item():
+#     # will add new item to db
+#     db.query('INSERT INTO todo_list (item, highlight, completed) values (?, ?)',
+#                  [request.form['item'], request.form['highlight'], request.form['completed']])
+#     # db.commit()
 
-    # return data somehow?
+#     # return data somehow?
 
-@app.route('/comp/<int:id>', methods=["PUT"])
-def mark_complete():
-    #will update an item's complete feild to trueflask
-    return db.query('SELECT * FROM todo_list')
+# @app.route('/comp/<int:id>', methods=["PUT"])
+# def mark_complete():
+#     #will update an item's complete feild to trueflask
+#     return db.query('SELECT * FROM todo_list')
 
 
 # do i need this?
-if __name__ == '__main__':
-    app.debug = True
-    app.run()
+app.run()
