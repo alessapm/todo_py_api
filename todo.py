@@ -48,20 +48,23 @@ def show_all():
 
     return jsonify(result_list)
 
-@app.route('/new', methods=["POST", "GET"])
+@app.route('/new', methods=["POST"])
 # print "request: " + request
 def add_item():
-    # will add new item to db
-    if flask.request.method=="POST":
-        return db.session.query('INSERT INTO todo_list (item, highlight, completed) values (?, ?)',
-                 [request.form['item'], request.form['highlight'], request.form['completed']])
+    print request
 
-    # db.commit()
-    if flask.request.method=="GET":
-        insert = 'INSERT INTO todo_list (item, completed) values ("go to the gym", false);'
-        db.session.query(insert)
+    if 'item' not in request.args:
+        return jsonify({ 'message':'Error: Missing Item'})
 
-    # return data somehow?
+    if 'completed' not in request.args:
+        completed = False
+    else:
+        completed = request.args.get('completed')
+
+
+
+
+
 
 # @app.route('/comp/<int:id>', methods=["PUT"])
 #     # has to pass an id to mark_complete
