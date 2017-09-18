@@ -61,11 +61,12 @@ def add_item():
     else:
         completed = request.args.get('completed')
 
-
+#populate model object
     todo = Todo()
     todo.item = request.args.get('item')
     todo.completed = completed
 
+# saves obj and commits it
     db.session.add(todo)
     db.session.commit()
 
@@ -73,12 +74,11 @@ def add_item():
 
 
 
-# @app.route('/comp/<int:id>', methods=["PUT"])
-#     # has to pass an id to mark_complete
-# def mark_complete(id):
-#     #will update an item's complete feild to true
-#     return db.session.query('UPDATE complete = true in todo_list where id = ? ', id)
+@app.route('/comp/<int:id>', methods=["PUT"])
+    # has to pass an id to mark_complete
+def mark_complete(id):
+    #will update an item's complete feild to true
+    return db.session.query('UPDATE complete = true in todo_list where id = ? ', id)
 
 
-# do i need this?
 app.run()
