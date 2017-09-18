@@ -98,4 +98,14 @@ def mark_all_complete():
 
     return 'completed'
 
+@app.route('/delete/<int:id>', methods=["PUT"])
+
+def delete_item(id):
+    item = Todo.query.get(id)
+
+    db.session.delete(item)
+    db.session.commit()
+
+    return 'delete completed'
+
 app.run()
