@@ -86,6 +86,7 @@ def mark_complete(id):
 
     return jsonify(todo.to_json())
 
+
 @app.route('/comp/all', methods=["PUT"])
 
 def mark_all_complete():
