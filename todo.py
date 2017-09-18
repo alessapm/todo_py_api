@@ -10,9 +10,14 @@ from flask import jsonify
 
 
 app=flask.Flask(__name__)
+CORS(app)
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todo.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+
+# do i need this?
+app.config['SQLALCHEMY_ECHO'] = True
 
 # create table todo_list(id integer primary key autoincrement,item text, completed boolean);
 
@@ -23,7 +28,8 @@ class Todo(db.Model):
     item = Column(db.String(500))
     completed = Column(db.Boolean)
 
-
+    def to_json(this):
+        return '<TODO %, %, %>' % (this.id, this.item, this.completed)
 """ I will need three routes,
 a GET (for retrieve all)
 a POST (for create new item)
