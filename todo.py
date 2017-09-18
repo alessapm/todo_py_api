@@ -51,7 +51,7 @@ def show_all():
 @app.route('/new', methods=["POST"])
 # print "request: " + request
 def add_item():
-    print request
+    print request.args
 
     if 'item' not in request.args:
         return jsonify({ 'message':'Error: Missing Item'})
@@ -62,7 +62,14 @@ def add_item():
         completed = request.args.get('completed')
 
 
+    todo = Todo()
+    todo.item = request.args.get('item')
+    todo.completed = completed
 
+    db.session.add(todo)
+    db.session.commit()
+
+    return jsonify(todo.to_json())
 
 
 
