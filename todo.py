@@ -81,10 +81,20 @@ def mark_complete(id):
 
     todo = Todo.query.get(id)
 
-    todo.completed = True
+    todo.completed = not todo.completed
     db.session.commit()
 
     return jsonify(todo.to_json())
 
+@app.route('/comp/all', methods=["PUT"])
+
+def mark_all_complete():
+    all_results = Todo.query.all()
+
+    for result in all_results:
+        result.completed = True
+    db.session.commit()
+
+    return 'completed'
 
 app.run()
