@@ -77,8 +77,14 @@ def add_item():
 @app.route('/comp/<int:id>', methods=["PUT"])
     # has to pass an id to mark_complete
 def mark_complete(id):
-    #will update an item's complete feild to true
-    return db.session.query('UPDATE complete = true in todo_list where id = ? ', id)
+    print 'id: ' + str(id)
+
+    todo = Todo.query.get(id)
+
+    todo.completed = True
+    db.session.commit()
+
+    return jsonify(todo.to_json())
 
 
 app.run()
