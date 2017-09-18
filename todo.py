@@ -29,7 +29,8 @@ class Todo(db.Model):
     completed = Column(db.Boolean)
 
     def to_json(this):
-        return '<TODO %, %, %>' % (this.id, this.item, this.completed)
+        return  {'id' : this.id, 'item': this.item, 'completed': this.completed}
+
 """ I will need three routes,
 a GET (for retrieve all)
 a POST (for create new item)
