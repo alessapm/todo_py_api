@@ -35,8 +35,11 @@ def show_all():
     print "inside show_all"
     data = Todo.query.all()
 
-    print data
-    return jsonify({'todo': data});
+    result_list = []
+    for result in data:
+        result_list.append(result.to_json())
+
+    return jsonify(result_list)
 
 @app.route('/new', methods=["POST", "GET"])
 # print "request: " + request
