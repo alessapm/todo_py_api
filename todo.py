@@ -74,7 +74,7 @@ def add_item():
 
 
 
-@app.route('/comp/<int:id>', methods=["PUT"])
+@app.route('/todo/complete/<int:id>', methods=["PUT"])
     # has to pass an id to mark_complete
 def mark_complete(id):
     print 'id: ' + str(id)
@@ -87,7 +87,7 @@ def mark_complete(id):
     return jsonify(todo.to_json())
 
 
-@app.route('/comp/all', methods=["PUT"])
+@app.route('/todo/complete/all', methods=["PUT"])
 
 def mark_all_complete():
     all_results = Todo.query.all()
@@ -98,7 +98,7 @@ def mark_all_complete():
 
     return 'completed'
 
-@app.route('/delete/<int:id>', methods=["PUT"])
+@app.route('/todo/destroy/<int:id>', methods=["DELETE"])
 
 def delete_item(id):
     item = Todo.query.get(id)
