@@ -35,7 +35,7 @@ class Todo(db.Model):
 a GET (for retrieve all)
 a POST (for create new item)
 a PUT (for mark item as complete) """
-@app.route('/', methods=["GET"])
+@app.route('/todo', methods=["GET"])
 
 def show_all():
     # will return all items in todo list
@@ -48,7 +48,7 @@ def show_all():
 
     return jsonify(result_list)
 
-@app.route('/new', methods=["POST"])
+@app.route('/todo/new', methods=["POST"])
 # print "request: " + request
 def add_item():
     print request.args
