@@ -26,8 +26,6 @@ This is the Flask API for a Todo App. It pairs with a React.js front end, the co
 
 This app is set up to use virtualenv, please see documentation [here](https://virtualenv.pypa.io/en/stable/). Please install all dependencies using pip install. 
 
-## Future Goals
 
-I would have liked to incorporate a drag and drop feature for reordering the todo items. 
 
 
