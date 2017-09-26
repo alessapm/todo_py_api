@@ -24,7 +24,7 @@ This is the Flask API for a Todo App. It pairs with a React.js front end, the co
 
 ## Setup
 
-This app is set up to use virtualenv, please see documentation [here](https://virtualenv.pypa.io/en/stable/). Please install all dependencies using pip install. 
+This app is set up to use virtualenv, please see documentation [here](https://virtualenv.pypa.io/en/stable/). Please install all dependencies using pip install, and start the server using 'flask run'
 
 
 
